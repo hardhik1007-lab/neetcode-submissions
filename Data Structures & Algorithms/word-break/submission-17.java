@@ -1,0 +1,30 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+
+        boolean[] dp = new boolean[s.length()+1];
+        dp[s.length()] = true;
+
+        for(int i = s.length() - 1; i>=0; i--){
+            // check if its possible to segment from i for every word in wordDict; build backwards;
+            // if we have a word, check  immediately after that word, it should also be true;
+
+            for(String w : wordDict){
+                if(i + w.length() <= s.length()){
+                    if(!dp[i + w.length()] ){
+                        continue;
+                    }else{
+                        if(s.substring(i, i + w.length()).equals(w)){
+                            dp[i] = true;
+                            break;
+                        }
+                    }
+                        
+                }
+               
+            }
+        }
+
+        return dp[0];
+        
+    }
+}
